@@ -1,46 +1,29 @@
 {% if section.settings.show_content %}
   <div
-    data-content-type="row"
-    data-appearance="full-bleed"
-    data-enable-parallax="0"
-    data-parallax-speed="0.5"
-    data-background-images="{}"
-    data-background-type="video"
-    data-video-src="https://player.vimeo.com/video/1041601380?title=0&amp;byline=0&amp;portrait=0"
-    data-video-loop="true"
-    data-video-play-only-visible="true"
-    data-video-lazy-load="true"
-    data-video-fallback-src="https://endotaspa.com.au/media/wysiwyg/endota_-_you.first_1.png"
-    data-element="main"
     data-pb-style="U1HMF14"
     class="jarallax"
-    data-jarallax=""
   >
     <div
-      class="pagebuilder-column-group"
-      data-background-images="{}"
-      data-content-type="column-group"
-      data-appearance="default"
-      data-grid-size="12"
-      data-element="main"
       data-pb-style="ULY64YR"
     >
-      <div class="pagebuilder-column-line" data-content-type="column-line" data-element="main" data-pb-style="PU6PQCO">
+      <div
+        class="pagebuilder-column-line"
+        data-pb-style="PU6PQCO"
+      >
         <div
           class="pagebuilder-column"
-          data-content-type="column"
-          data-appearance="full-height"
-          data-background-images="{}"
-          data-element="main"
           data-pb-style="J4HN5HH"
         ></div>
         <div
           class="pagebuilder-column comp-header-column"
-          data-content-type="column"
-          data-appearance="full-height"
-          data-background-images="{}"
-          data-element="main"
           data-pb-style="ANXFJSH"
+          style="
+                    display: flex; align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    position: relative;
+            top: 300px;
+          "
         >
           <div class="hero-banner-header" data-content-type="text" data-appearance="default" data-element="main">
             <h1>
@@ -58,26 +41,16 @@
             </p>
           </div>
           <div
-            data-content-type="buttons"
-            data-appearance="inline"
-            data-same-width="false"
-            data-element="main"
             data-pb-style="DOVPWIG"
             class="winter-banner-button"
           >
             <div
               class="winter-banner-button"
-              data-content-type="button-item"
-              data-appearance="default"
-              data-element="main"
               data-pb-style="FVT93GX"
             >
               <a
                 class="pagebuilder-button-secondary"
-                href="/you-first"
-                target=""
-                data-link-type="default"
-                data-element="link"
+                href="https://endotaspa.com.au/"
                 data-pb-style="WEDKU7C"
                 ><span data-element="link_text">{{- section.settings.link1 | default: 'Learn more' -}}</span></a
               >
@@ -86,21 +59,17 @@
         </div>
         <div
           class="pagebuilder-column"
-          data-content-type="column"
-          data-appearance="full-height"
-          data-background-images="{}"
-          data-element="main"
           data-pb-style="KHYWX46"
         ></div>
       </div>
     </div>
     <div
       id="jarallax-container-0"
-      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100; clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%);"
+      style="position: absolute; top: 0px; left: 0px; width:100%; overflow: hidden; z-index: -100;"
     >
       <video
         frameborder="0"
-        src="{% if block.settings.videourl %}{{ block.settings.videourl |  video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+        src="{% if section.settings.videourl %}{{ section.settings.videourl |  video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
         autoplay="true"
         muted="true"
         playsinline="true"

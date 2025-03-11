@@ -1,0 +1,79 @@
+a.pagebuilder-button-secondary,
+button.pagebuilder-button-secondary,
+div.pagebuilder-button-secondary {
+  text-decoration: none;
+  background-image: none;
+  background: #fff;
+  border: #334639;
+  color: #334639;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "ValueSansPro-Bold", sans-serif;
+  font-weight: 400;
+  margin: 0 10px 10px 0;
+  padding: 14px 24px;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  box-sizing: border-box;
+  vertical-align: middle;
+  box-shadow: none;
+}
+a.pagebuilder-button-secondary:hover,
+button.pagebuilder-button-secondary:hover,
+div.pagebuilder-button-secondary:hover,
+a.pagebuilder-button-secondary:active,
+button.pagebuilder-button-secondary:active,
+div.pagebuilder-button-secondary:active,
+a.pagebuilder-button-secondary:focus,
+button.pagebuilder-button-secondary:focus,
+div.pagebuilder-button-secondary:focus {
+  text-decoration: none;
+}
+a.pagebuilder-button-secondary:focus,
+button.pagebuilder-button-secondary:focus,
+div.pagebuilder-button-secondary:focus,
+a.pagebuilder-button-secondary:active,
+button.pagebuilder-button-secondary:active,
+div.pagebuilder-button-secondary:active {
+  background: #fff;
+  border: #334639;
+  color: #334639;
+}
+a.pagebuilder-button-secondary:hover,
+button.pagebuilder-button-secondary:hover,
+div.pagebuilder-button-secondary:hover {
+  background: #334639;
+  border: #334639;
+  color: #fff;
+}
+a.pagebuilder-button-secondary.disabled,
+button.pagebuilder-button-secondary.disabled,
+div.pagebuilder-button-secondary.disabled,
+a.pagebuilder-button-secondary[disabled],
+button.pagebuilder-button-secondary[disabled],
+div.pagebuilder-button-secondary[disabled],
+fieldset[disabled] a.pagebuilder-button-secondary,
+fieldset[disabled] button.pagebuilder-button-secondary,
+fieldset[disabled] div.pagebuilder-button-secondary {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+a.pagebuilder-button-secondary:hover,
+button.pagebuilder-button-secondary:hover,
+div.pagebuilder-button-secondary:hover {
+  transition: all 0.3s ease-out;
+}
+
+#html-body [data-pb-style="J4HN5HH"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pagebuilder-column .comp-header-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
