@@ -1,0 +1,21 @@
+{% if section.settings.show_content %}
+  <p>Hello</p>
+{% endif %}
+{% schema %}
+{
+  "name": "banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_content",
+      "label": "Show this section",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "banner"
+    }
+  ]
+}
+{% endschema %}
