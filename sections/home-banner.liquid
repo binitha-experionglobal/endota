@@ -69,7 +69,7 @@
     >
       <video
         frameborder="0"
-        src="{% if section.settings.videourl %}{{ section.settings.videourl |  video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+        src="{% if section.settings.videourl %}{{ section.settings.videourl }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
         autoplay="true"
         muted="true"
         playsinline="true"
