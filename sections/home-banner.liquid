@@ -1,5 +1,114 @@
 {% if section.settings.show_content %}
-  <p>Hello</p>
+  <div
+    data-content-type="row"
+    data-appearance="full-bleed"
+    data-enable-parallax="0"
+    data-parallax-speed="0.5"
+    data-background-images="{}"
+    data-background-type="video"
+    data-video-src="https://player.vimeo.com/video/1041601380?title=0&amp;byline=0&amp;portrait=0"
+    data-video-loop="true"
+    data-video-play-only-visible="true"
+    data-video-lazy-load="true"
+    data-video-fallback-src="https://endotaspa.com.au/media/wysiwyg/endota_-_you.first_1.png"
+    data-element="main"
+    data-pb-style="U1HMF14"
+    class="jarallax"
+    data-jarallax=""
+  >
+    <div
+      class="pagebuilder-column-group"
+      data-background-images="{}"
+      data-content-type="column-group"
+      data-appearance="default"
+      data-grid-size="12"
+      data-element="main"
+      data-pb-style="ULY64YR"
+    >
+      <div class="pagebuilder-column-line" data-content-type="column-line" data-element="main" data-pb-style="PU6PQCO">
+        <div
+          class="pagebuilder-column"
+          data-content-type="column"
+          data-appearance="full-height"
+          data-background-images="{}"
+          data-element="main"
+          data-pb-style="J4HN5HH"
+        ></div>
+        <div
+          class="pagebuilder-column comp-header-column"
+          data-content-type="column"
+          data-appearance="full-height"
+          data-background-images="{}"
+          data-element="main"
+          data-pb-style="ANXFJSH"
+        >
+          <div class="hero-banner-header" data-content-type="text" data-appearance="default" data-element="main">
+            <h1>
+              <span style="color: #ffffff;">{{ section.settings.text1 | default: 'You.First ' }}</span>
+            </h1>
+          </div>
+          <div data-content-type="text" data-appearance="default" data-element="main">
+            <p>
+              <span style="font-size: 18pt; color: #ffffff;">
+                {{- section.settings.text2 | default: 'prioritise you' -}}</span
+              ><br>
+              <span style="font-size: 18pt; color: #ffffff;">
+                {{- section.settings.text3 | default: 'the world can wait' -}}
+              </span>
+            </p>
+          </div>
+          <div
+            data-content-type="buttons"
+            data-appearance="inline"
+            data-same-width="false"
+            data-element="main"
+            data-pb-style="DOVPWIG"
+            class="winter-banner-button"
+          >
+            <div
+              class="winter-banner-button"
+              data-content-type="button-item"
+              data-appearance="default"
+              data-element="main"
+              data-pb-style="FVT93GX"
+            >
+              <a
+                class="pagebuilder-button-secondary"
+                href="/you-first"
+                target=""
+                data-link-type="default"
+                data-element="link"
+                data-pb-style="WEDKU7C"
+                ><span data-element="link_text">{{- section.settings.link1 | default: 'Learn more' -}}</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="pagebuilder-column"
+          data-content-type="column"
+          data-appearance="full-height"
+          data-background-images="{}"
+          data-element="main"
+          data-pb-style="KHYWX46"
+        ></div>
+      </div>
+    </div>
+    <div
+      id="jarallax-container-0"
+      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100; clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%);"
+    >
+      <video
+        frameborder="0"
+        src="{% if block.settings.videourl %}{{ block.settings.videourl |  video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+        autoplay="true"
+        muted="true"
+        playsinline="true"
+        data-element="video"
+        loop="loop"
+      ></video>
+    </div>
+  </div>
 {% endif %}
 {% schema %}
 {
@@ -10,6 +119,31 @@
       "id": "show_content",
       "label": "Show this section",
       "default": true
+    },
+    {
+      "type": "video",
+      "id": "videourl",
+      "label": "Choose a Video"
+    },
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Text1"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Text2"
+    },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Text3"
+    },
+    {
+      "type": "text",
+      "id": "link1",
+      "label": "Link text"
     }
   ],
   "presets": [
