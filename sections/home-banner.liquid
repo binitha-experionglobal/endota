@@ -70,13 +70,22 @@
       <video
         id="background-video"
         frameborder="0"
-        data-src="{% if section.settings.videourl %}{{ section.settings.videourl }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+        data-src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
         autoplay
         muted
         playsinline
         loop
       ></video>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var video = document.getElementById('background-video');
+        if (video) {
+          video.src = video.getAttribute('data-src');
+          video.play();
+        }
+      });
+    </script>
   </div>
 {% endif %}
 {% schema %}
