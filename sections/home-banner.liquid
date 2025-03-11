@@ -69,12 +69,25 @@
     >
       <video
         id="background-video"
-        frameborder="0"
-        src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
         autoplay
         muted
+        playsinline
         loop
-      ></video>
+      >
+        <source src="{{ section.settings.videourl | asset_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      {% comment %}
+        <video
+          id="background-video"
+          frameborder="0"
+          src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+          autoplay
+          muted
+          loop
+        ></video>
+      {% endcomment %}
     </div>
   </div>
 {% endif %}
