@@ -50,7 +50,7 @@
             >
               <a
                 class="pagebuilder-button-secondary"
-                href="https://endotaspa.com.au/"
+                href="{{section.settings.urls| default:'https://endotaspa.com.au/'}}"
                 data-pb-style="WEDKU7C"
                 ><span data-element="link_text">{{- section.settings.link1 | default: 'Learn more' -}}</span></a
               >
@@ -73,19 +73,9 @@
         src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
         autoplay
         muted
-        playsinline
         loop
       ></video>
     </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var video = document.getElementById('background-video');
-        if (video) {
-          video.src = video.getAttribute('data-src');
-          video.play();
-        }
-      });
-    </script>
   </div>
 {% endif %}
 {% schema %}
@@ -99,7 +89,7 @@
       "default": true
     },
     {
-      "type": "url",
+      "type": "video",
       "id": "videourl",
       "label": "Choose a Video"
     },
@@ -122,6 +112,11 @@
       "type": "text",
       "id": "link1",
       "label": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "urls",
+      "label": "url for link text"
     }
   ],
   "presets": [
