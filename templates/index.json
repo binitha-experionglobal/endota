@@ -13,6 +13,7 @@
       "type": "home-banner",
       "settings": {
         "show_content": true,
+        "videourl": "shopify://files/videos/video (2160p).mp4",
         "text1": "you",
         "text2": "priority",
         "text3": "text",
