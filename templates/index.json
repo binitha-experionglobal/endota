@@ -13,7 +13,7 @@
       "type": "home-banner",
       "settings": {
         "show_content": true,
-        "videourl": "shopify://files/videos/Horses for sale _ HorseDeals, Australia.mp4",
+        "videourl": "https://res.cloudinary.com/toni-maticevski/video/upload/c_fill,h_4400,w_3000/q_auto/v1726614585/S25/reconnaissance-bodice-black-organza_leather_fringe_phormium-shirt-black-organza_exotic-skirt-sparkle-of-stars_acxybw.mp4",
         "text1": "you",
         "text2": "priority",
         "text3": "text",
