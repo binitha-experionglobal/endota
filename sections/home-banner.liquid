@@ -82,6 +82,20 @@
           Your browser does not support the video tag.
         </video>
       {% else %}
+        <video
+          id="background-video"
+          autoplay
+          muted
+          playsinline
+          loop
+        >
+          <source
+            src="{% if section.settings.video_url %}{{ section.settings.video_url| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+            type="video/mp4"
+          >
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
         <img
           height=""
           width=""
@@ -110,6 +124,12 @@
       "type": "video",
       "id": "videourl",
       "label": "Choose a Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Choose a Video",
+      "accept": ["vimeo", "youtube"]
     },
     {
       "type": "image_picker",
