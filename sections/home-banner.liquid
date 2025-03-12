@@ -67,30 +67,32 @@
       id="jarallax-container-0"
       style="position: absolute; top: 0px; left: 0px; width:100%; overflow: hidden; z-index: -100; height: 100%"
     >
-      <video
-        id="background-video"
-        autoplay
-        muted
-        playsinline
-        loop
-      >
-        <source
-          src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
-          type="video/mp4"
-        >
-        Your browser does not support the video tag.
-      </video>
-
-      {% comment %}
+      {% if section.settings.videourl %}
         <video
           id="background-video"
-          frameborder="0"
-          src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
           autoplay
           muted
+          playsinline
           loop
-        ></video>
-      {% endcomment %}
+        >
+          <source
+            src="{% if section.settings.videourl %}{{ section.settings.videourl| video_tag }}{% else %}{{ 'banner.mp4' | asset_url }}{% endif %}"
+            type="video/mp4"
+          >
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
+        <img
+          height=""
+          width=""
+          class="pagebuilder-mobile-hidden"
+          src="{% if section.settings.imageurl %}{{ section.settings.imageurl | image_url }}{% else %}{{ 'banner1.png' | asset_url }}{% endif %}"
+          alt=""
+          title=""
+          data-element="desktop_image"
+          data-pb-style="H4XTM4I"
+        >
+      {% endif %}
     </div>
   </div>
 {% endif %}
@@ -108,6 +110,11 @@
       "type": "video",
       "id": "videourl",
       "label": "Choose a Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "imageurl",
+      "label": "Choose an Image"
     },
     {
       "type": "text",
