@@ -1,45 +1,6 @@
 {% if section.settings.show_content %}
   {% comment %} {% if section.settings.enable_announcement %} {% endcomment %}
-  {% assign announcements = shop.metaobjects.announcement.values %}
 
-  {% if announcements.size > 0 %}
-    <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
-      <div id="announcement-slider">
-        {% for announcement in announcements %}
-          <div
-            class="announcement-message"
-            style="
-              display: none;
-              background-color: {{ announcement.background_color | default: '#008000' }};
-              color: {{ announcement.text_color | default: '#ffffff' }};
-              padding: 10px;
-            "
-          >
-            {{ announcement.message }}
-            {% if announcement.link != blank %}
-              <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var messages = document.querySelectorAll('.announcement-message');
-        if (messages.length > 0) {
-          let index = 0;
-          messages[index].style.display = 'block';
-
-          setInterval(() => {
-            messages[index].style.display = 'none';
-            index = (index + 1) % messages.length;
-            messages[index].style.display = 'block';
-          }, 4000);
-        }
-      });
-    </script>
-  {% endif %}
   {% comment %} {% endif %} {% endcomment %}
   <div
     data-pb-style="U1HMF14"
@@ -72,6 +33,46 @@
         </li>
       {% endfor %}
     </ul>
+    {% assign announcements = shop.metaobjects.announcement.values %}
+
+    {% if announcements.size > 0 %}
+      <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
+        <div id="announcement-slider">
+          {% for announcement in announcements %}
+            <div
+              class="announcement-message"
+              style="
+                display: none;
+                background-color: {{ announcement.background_color | default: '#008000' }};
+                color: {{ announcement.text_color | default: '#ffffff' }};
+                padding: 10px;
+              "
+            >
+              {{ announcement.message }}
+              {% if announcement.link != blank %}
+                <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var messages = document.querySelectorAll('.announcement-message');
+          if (messages.length > 0) {
+            let index = 0;
+            messages[index].style.display = 'block';
+
+            setInterval(() => {
+              messages[index].style.display = 'none';
+              index = (index + 1) % messages.length;
+              messages[index].style.display = 'block';
+            }, 4000);
+          }
+        });
+      </script>
+    {% endif %}
     <div
       data-pb-style="ULY64YR"
     >
