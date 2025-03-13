@@ -1,30 +1,30 @@
 {% if section.settings.show_content %}
-  {% comment %} {% if section.settings.enable_announcement %} {% endcomment %}
-  {% assign announcements = shop.metaobjects.announcement.values %}
+  {% if section.settings.enable_announcement %}
+    {% assign announcements = shop.metaobjects.announcement.values %}
 
-  {% if announcements %}
-    <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
-      <div id="announcement-slider">
-        {% for announcement in announcements %}
-          <div
-            class="announcement-message"
-            style="
-              display: block;
-              background-color: {{ announcement.background_color | default: '#008000' }};
-              color: {{ announcement.text_color | default: '#ffffff' }};
-              padding: 10px;
-            "
-          >
-            {{ announcement.message }}
-            {% if announcement.link != blank %}
-              <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
-            {% endif %}
-          </div>
-        {% endfor %}
+    {% if announcements %}
+      <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
+        <div id="announcement-slider">
+          {% for announcement in announcements %}
+            <div
+              class="announcement-message"
+              style="
+                display: block;
+                background-color: {{ announcement.background_color | default: '#008000' }};
+                color: {{ announcement.text_color | default: '#ffffff' }};
+                padding: 10px;
+              "
+            >
+              {{ announcement.message }}
+              {% if announcement.link != blank %}
+                <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
-    </div>
+    {% endif %}
   {% endif %}
-  {% comment %} {% endif %} {% endcomment %}
   <div
     data-pb-style="U1HMF14"
     class="jarallax"
@@ -236,45 +236,12 @@
       "id": "urls",
       "label": "url for link text"
     },
-    {
-      "type": "checkbox",
-      "id": "show_content",
-      "label": "Show this section",
-      "default": true
-    },
+
     {
       "type": "checkbox",
       "id": "enable_announcement",
       "label": "Enable Announcement Bar",
       "default": true
-    },
-    {
-      "type": "textarea",
-      "id": "announcement_messages",
-      "label": "Announcement Messages (separate with `|`)",
-      "default": "Free Shipping on orders over $75! | New Arrivals in stock!"
-    },
-    {
-      "type": "color",
-      "id": "announcement_bg",
-      "label": "Background Color",
-      "default": "#008000"
-    },
-    {
-      "type": "color",
-      "id": "announcement_text_color",
-      "label": "Text Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "announcement_link_text",
-      "label": "Link Text (optional)"
-    },
-    {
-      "type": "url",
-      "id": "announcement_link_url",
-      "label": "Link URL (optional)"
     }
   ],
   "presets": [
