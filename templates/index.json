@@ -21,6 +21,13 @@
         "link1": "go to localhost",
         "urls": "https://github.com/marketplace/shopify-online-store"
       }
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_content": true,
+        "enable_announcement": true,
+      }
     }
   },
   "order": [

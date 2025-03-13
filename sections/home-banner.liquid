@@ -1,44 +1,4 @@
 {% if section.settings.show_content %}
-  {% if section.settings.enable_announcement %}
-    <div
-      id="announcement-bar"
-      style="
-        background-color: {{ section.settings.announcement_bg }};
-        color: {{ section.settings.announcement_text_color }};
-        text-align: center;
-        padding: 10px;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-      "
-    >
-      <div id="announcement-slider">
-        {% assign messages = section.settings.announcement_messages | split: '|' %}
-        {% for message in messages %}
-          <span class="announcement-message" style="display: none;">{{ message }}</span>
-        {% endfor %}
-      </div>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var messages = document.querySelectorAll('.announcement-message');
-        if (messages.length > 0) {
-          let index = 0;
-          messages[index].style.display = 'inline-block';
-
-          setInterval(() => {
-            messages[index].style.display = 'none';
-            index = (index + 1) % messages.length;
-            messages[index].style.display = 'inline-block';
-          }, 4000);
-        }
-      });
-    </script>
-  {% endif %}
-
   <div
     data-pb-style="U1HMF14"
     class="jarallax"
@@ -209,38 +169,45 @@
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "enable_announcement",
-      "label": "Enable Announcement Bar",
-      "default": true
+      "type": "video",
+      "id": "videourl",
+      "label": "Choose a Video"
     },
     {
-      "type": "textarea",
-      "id": "announcement_messages",
-      "label": "Announcement Messages (separate with `|`)",
-      "default": "Free Shipping on orders over $75! | New Arrivals in stock!"
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Choose a Video",
+      "accept": ["vimeo", "youtube"]
     },
     {
-      "type": "color",
-      "id": "announcement_bg",
-      "label": "Background Color",
-      "default": "#008000"
-    },
-    {
-      "type": "color",
-      "id": "announcement_text_color",
-      "label": "Text Color",
-      "default": "#ffffff"
+      "type": "image_picker",
+      "id": "imageurl",
+      "label": "Choose an Image"
     },
     {
       "type": "text",
-      "id": "announcement_link_text",
-      "label": "Link Text (optional)"
+      "id": "text1",
+      "label": "Text1"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Text2"
+    },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Text3"
+    },
+    {
+      "type": "text",
+      "id": "link1",
+      "label": "Link text"
     },
     {
       "type": "url",
-      "id": "announcement_link_url",
-      "label": "Link URL (optional)"
+      "id": "urls",
+      "label": "url for link text"
     }
   ],
   "presets": [
