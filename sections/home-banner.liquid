@@ -9,7 +9,7 @@
             <div
               class="announcement-message"
               style="
-                display: block;
+                display: none;
                 background-color: {{ announcement.background_color | default: '#008000' }};
                 color: {{ announcement.text_color | default: '#ffffff' }};
                 padding: 10px;
@@ -23,6 +23,21 @@
           {% endfor %}
         </div>
       </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var messages = document.querySelectorAll('.announcement-message');
+          if (messages.length > 0) {
+            let index = 0;
+            messages[index].style.display = 'block';
+
+            setInterval(() => {
+              messages[index].style.display = 'none';
+              index = (index + 1) % messages.length;
+              messages[index].style.display = 'block';
+            }, 4000);
+          }
+        });
+      </script>
     {% endif %}
   {% endif %}
   <div
