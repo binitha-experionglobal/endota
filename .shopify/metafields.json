@@ -2,7 +2,38 @@
   "article": [],
   "blog": [],
   "brand": [],
-  "collection": [],
+  "collection": [
+    {
+      "key": "image_1",
+      "namespace": "custom",
+      "name": "Image 1",
+      "description": "",
+      "type": {
+        "name": "link",
+        "category": "LINK"
+      }
+    },
+    {
+      "key": "image2",
+      "namespace": "custom",
+      "name": "Image2",
+      "description": "",
+      "type": {
+        "name": "link",
+        "category": "LINK"
+      }
+    },
+    {
+      "key": "image_3",
+      "namespace": "custom",
+      "name": "Image 3",
+      "description": "",
+      "type": {
+        "name": "link",
+        "category": "LINK"
+      }
+    }
+  ],
   "company": [],
   "company_location": [],
   "location": [],

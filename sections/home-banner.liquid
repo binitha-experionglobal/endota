@@ -1,45 +1,47 @@
 {% if section.settings.show_content %}
-  {% if section.settings.enable_announcement %}
-    {% assign announcements = shop.metaobjects.announcement.values %}
+  {% comment %}
+    {% if section.settings.enable_announcement %}
+      {% assign announcements = shop.metaobjects.announcement.values %}
 
-    {% if announcements %}
-      <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
-        <div id="announcement-slider">
-          {% for announcement in announcements %}
-            <div
-              class="announcement-message"
-              style="
-                display: none;
-                background-color: {{ announcement.background_color | default: '#008000' }};
-                color: {{ announcement.text_color | default: '#ffffff' }};
-                padding: 10px;
-              "
-            >
-              {{ announcement.message }}
-              {% if announcement.link != blank %}
-                <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
-              {% endif %}
-            </div>
-          {% endfor %}
+      {% if announcements %}
+        <div id="announcement-bar" style="position: fixed; top: 0; width: 100%; text-align: center; z-index: 1000;">
+          <div id="announcement-slider">
+            {% for announcement in announcements %}
+              <div
+                class="announcement-message"
+                style="
+                  display: none;
+                  background-color: {{ announcement.background_color | default: '#008000' }};
+                  color: {{ announcement.text_color | default: '#ffffff' }};
+                  padding: 10px;
+                "
+              >
+                {{ announcement.message }}
+                {% if announcement.link != blank %}
+                  <a href="{{ announcement.link }}" style="color: inherit; text-decoration: underline;">Learn More</a>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          var messages = document.querySelectorAll('.announcement-message');
-          if (messages.length > 0) {
-            let index = 0;
-            messages[index].style.display = 'block';
-
-            setInterval(() => {
-              messages[index].style.display = 'none';
-              index = (index + 1) % messages.length;
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            var messages = document.querySelectorAll('.announcement-message');
+            if (messages.length > 0) {
+              let index = 0;
               messages[index].style.display = 'block';
-            }, 4000);
-          }
-        });
-      </script>
+
+              setInterval(() => {
+                messages[index].style.display = 'none';
+                index = (index + 1) % messages.length;
+                messages[index].style.display = 'block';
+              }, 4000);
+            }
+          });
+        </script>
+      {% endif %}
     {% endif %}
-  {% endif %}
+  {% endcomment %}
   <div
     data-pb-style="U1HMF14"
     class="jarallax"
@@ -49,17 +51,85 @@
         <li>
           <a href="{{ link.url }}">{{ link.title }}</a>
 
+          {% assign collection = collections[link.handle] %}
+
+          {% if collection.metafields.custom.image_1 != blank %}
+            <img
+              src="{{ collection.metafields.custom.image_1.value.url }}"
+              alt="{{ collection.title }} Image 1"
+              height="100px"
+              width="100px"
+            >
+          {% endif %}
+
+          {% if collection.metafields.custom.image2 != blank %}
+            <img
+              src="{{ collection.metafields.custom.image2.value.url }}"
+              alt="{{ collection.title }} Image 2"
+              height="100px"
+              width="100px"
+            >
+          {% endif %}
+          {% if collection.metafields.custom.image_3 != blank %}
+            <img
+              src="{{ collection.metafields.custom.image_3.value.url }}"
+              alt="{{ collection.title }} Image 3"
+              height="100px"
+              width="100px"
+            >
+          {% endif %}
+
           {% if link.links != blank %}
             <ul>
               {% for sub_link in link.links %}
                 <li>
                   <a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
 
+                  {% assign sub_collection = collections[sub_link.handle] %}
+
+                  {% if sub_collection.metafields.custom.image_1 != blank %}
+                    <img
+                      src="{{ sub_collection.metafields.custom.image_1 | img_url: 'medium' }}"
+                      alt="{{ sub_collection.title }} Image 1"
+                      height=""
+                      width=""
+                    >
+                  {% endif %}
+
+                  {% if sub_collection.metafields.custom.image_2 != blank %}
+                    <img
+                      src="{{ sub_collection.metafields.custom.image_2 | img_url: 'medium' }}"
+                      alt="{{ sub_collection.title }} Image 2"
+                      height=""
+                      width=""
+                    >
+                  {% endif %}
+
                   {% if sub_link.links != blank %}
                     <ul>
                       {% for sub_sub_link in sub_link.links %}
                         <li>
                           <a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+
+                          {% assign sub_sub_collection = collections[sub_sub_link.handle] %}
+
+                          {% if sub_sub_collection.metafields.custom.image_1 != blank %}
+                            <img
+                              src="{{ sub_sub_collection.metafields.custom.image_1 | img_url: 'medium' }}"
+                              alt="{{ sub_sub_collection.title }} Image 1"
+                              height=""
+                              width=""
+                            >
+                          {% endif %}
+
+                          {% if sub_sub_collection.metafields.custom.image_2 != blank %}
+                            <img
+                              src="{{ sub_sub_collection.metafields.custom.image_2 | img_url: 'medium' }}"
+                              alt="{{ sub_sub_collection.title }} Image 2"
+                              height=""
+                              width=""
+                            >
+                          {% endif %}
                         </li>
                       {% endfor %}
                     </ul>
