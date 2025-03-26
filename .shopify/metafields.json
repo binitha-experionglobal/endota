@@ -32,6 +32,36 @@
         "name": "link",
         "category": "LINK"
       }
+    },
+    {
+      "key": "subcategory_data",
+      "namespace": "custom",
+      "name": "Subcategory data",
+      "description": "Subcategory data",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "subcategory",
+      "namespace": "custom",
+      "name": "subcategory",
+      "description": "subcategory",
+      "type": {
+        "name": "json",
+        "category": "JSON"
+      }
+    },
+    {
+      "key": "subcategories",
+      "namespace": "custom",
+      "name": "Subcategories",
+      "description": "Subcategories",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "company": [],

@@ -1,4 +1,81 @@
-<div>
-    <h1>{{ page.title }}</h1>
-    <div>{{ page.content }}</div>
+<div class="category-view ">
+  <div class="category-content">
+    <div class="page-title-wrapper">
+      <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading toolbar-amount">
+        <span class="base" id="main-container-text" data-ui-id="page-title-wrapper"></span>
+      </h1>
+    </div>
+    <div class="category-description">
+      <style>
+        #html-body [data-pb-style='DFGY5F3'] {
+          justify-content: flex-start;
+          display: flex;
+          flex-direction: column;
+          background-position: left top;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+        }
+      </style>
+      <div
+        data-content-type="row"
+        data-appearance="full-bleed"
+        data-enable-parallax="0"
+        data-parallax-speed="0.5"
+        data-background-images="{}"
+        data-background-type="image"
+        data-video-loop="true"
+        data-video-play-only-visible="true"
+        data-video-lazy-load="true"
+        data-video-fallback-src=""
+        data-element="main"
+        data-pb-style="DFGY5F3"
+      >
+        <div data-content-type="text" data-appearance="default" data-element="main">
+          <p>
+            Whether looking for deep hydration or lightweight replenishment, seal in your skincare benefits with our
+            range of moisturisers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="category-filter">
+    {% assign subcategories_json = collections.face.metafields.custom.subcategories.value %}
+    <div id="subcategory-data" data-subcategories="{{ subcategories_json | json | escape }}">
+      <li class="active">
+        <a id="category-active" class="no-decoration" href="#"> </a>
+      </li>
+      <span id="peer-categories"></span>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const subcategoryElement = document.getElementById('subcategory-data');
+        const peerContainer = document.getElementById('peer-categories');
+        const category = document.getElementById('category-active');
+        const mainContainer = document.getElementById('main-container-text');
+
+        if (subcategoryElement) {
+          try {
+            const subcategories = JSON.parse(subcategoryElement.dataset.subcategories);
+            console.log('Parsed JSON:', subcategories);
+            category.innerHTML = subcategories[0].subcategory_details.category.replace('_', ' ');
+            mainContainer.innerHTML = subcategories[0].subcategory_details.category.replace('_', ' ').toUpperCase();
+            let peerHtml = '';
+            subcategories[0].subcategory_details.peer.forEach((element) => {
+              console.log(element);
+              peerHtml += `<li class="un-active">
+          <a class="no-decoration" href=${element.link}>${element.name.replace(/_/g, ' ')}</a>
+        </li>`;
+            });
+            console.log(peerHtml);
+            peerContainer.innerHTML = peerHtml;
+          } catch (error) {
+            console.error('Error parsing subcategories JSON:', error);
+          }
+        }
+      });
+    </script>
+  </ul>
 </div>
