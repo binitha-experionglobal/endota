@@ -1,19 +1,144 @@
-{% if collection == blank %}
-  <h2>Collection Not Found</h2>
-  <p>The category you are looking for does not exist.</p>
-{% else %}
-  <h1>{{ collection.title }}</h1>
-  <p>{{ collection.description }}</p>
+{% assign url_parts = request.path | split: '/' %}
+{% assign last_part = url_parts | reverse | first %}
+{% assign selected_collection = collections[last_part] %}
 
-  <ul>
-    {% for product in collection.products %}
-      <li>
-        <a href="{{ product.url }}">
-          <img width="" height="" src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <h2>{{ product.title }}</h2>
-          <p>{{ product.price | money }}</p>
-        </a>
-      </li>
+{% if selected_collection %}
+  <div
+    class="category-view "
+    style="background-image: url(https://cdn.shopify.com/s/files/1/0914/5860/1264/files/banner.png?v=1743485327);     background-size: cover;"
+  >
+    <div class="category-content">
+      <div class="page-title-wrapper">
+        <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading toolbar-amount">
+          <span class="base" id="main-container-text" data-ui-id="page-title-wrapper">
+            {{- selected_collection.title -}}
+          </span>
+        </h1>
+      </div>
+      <div class="category-description">
+        <style>
+          #html-body [data-pb-style='DFGY5F3'] {
+            justify-content: flex-start;
+            display: flex;
+            flex-direction: column;
+            background-position: left top;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+          }
+        </style>
+        <div
+          data-content-type="row"
+          data-appearance="full-bleed"
+          data-enable-parallax="0"
+          data-parallax-speed="0.5"
+          data-background-type="image"
+          data-video-loop="true"
+          data-video-play-only-visible="true"
+          data-video-lazy-load="true"
+          data-video-fallback-src=""
+          data-element="main"
+          data-pb-style="DFGY5F3"
+        >
+          <div data-content-type="text" data-appearance="default" data-element="main">
+            <p>
+              Whether looking for deep hydration or lightweight replenishment, seal in your skincare benefits with our
+              range of moisturisers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="category-filter">
+      <span id="all-categories"></span>
+      <span id="peer-categories"></span>
+    </ul>
+  </div>
+  {% if selected_collection.metafields.custom.type.value != 'Parent' %}
+    {% if collection.products.size > 0 %}
+      <div class="product-grid">
+        {% for product in collection.products %}
+          <div class="product-tile">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" height="" width="">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endif %}
+  {% else %}
+    {% assign peer_categories = selected_collection.metafields.custom.peercategories.value %}
+    {% for category in peer_categories %}
+      {% assign collection = collections[category.handle] %}
+      {% if collection.products.size > 0 %}
+        <h2>{{ collection.title }}</h2>
+        <div class="product-grid">
+          {% for product in collection.products %}
+            <div class="product-tile">
+              <a href="{{ product.url }}">
+                <img
+                  src="{{ product.featured_image | img_url: 'medium' }}"
+                  alt="{{ product.title }}"
+                  height=""
+                  width=""
+                >
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endfor %}
-  </ul>
+  {% endif %}
+
+  <script>
+    let subcats = JSON.parse('{{selected_collection.metafields.custom.peercategories.value | json}}');
+    let type = '{{selected_collection.metafields.custom.type.value}}' == 'Parent';
+    let parentHandle = '{{selected_collection.metafields.custom.parent_handle.value}}';
+    // console.log('type', parentHandle);
+    let subcat = subcats?.sort((a, b) => a.handle.localeCompare(b.handle));
+    // console.log(subcat);
+    let url_path = JSON.parse('{{last_part |  json}} ');
+    // function capitalize(str) {
+    //   let name = `${str[0].toUpperCase() + str.substring(1)}`;
+    //   return name;
+    // }
+    document.addEventListener('DOMContentLoaded', function () {
+      const peerContainer = document.getElementById('peer-categories');
+      const all = document.getElementById('all-categories');
+
+      if (subcat) {
+        try {
+          let peerHtml = '';
+          let isActive = false;
+
+          subcat.forEach(({ handle }) => {
+            const isActiveClass = handle === url_path ? 'active' : 'un-active';
+            if (handle === url_path) isActive = true;
+            let catName = handle.replace(/-/g, ' ').replace(/and/g, '&');
+            peerHtml += `
+        <li class="${isActiveClass}">
+          <a class="no-decoration" href="${handle}">${catName}</a>
+        </li>`;
+          });
+
+          all.innerHTML = `
+      <li class="${isActive ? 'un-active' : 'active'}">
+        <a id="category-active" class="no-decoration" href=${type ? url_path : `/collections${parentHandle}`}>All</a>
+      </li>`;
+
+          peerContainer.innerHTML = peerHtml;
+        } catch (error) {
+          console.error('Error parsing subcategories JSON:', error);
+        }
+      }
+    });
+  </script>
+{% else %}
+  <p>No collection found.</p>
 {% endif %}

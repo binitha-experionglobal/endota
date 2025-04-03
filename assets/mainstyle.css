@@ -6475,7 +6475,7 @@ fieldset[disabled] .block-bundle-summary .action.towishlist {
 .filtered .item .action.remove,
 .category-filter li .action.remove {
   display: inline-block;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 .abs-remove-button-for-blocks > span,
 .table-comparison .cell.remove .action.delete > span,
@@ -25911,7 +25911,6 @@ fieldset[disabled]
   color: #395542;
   background-color: transparent;
   font-family: "ValueSansPro-Bold", sans-serif;
-  text-transform: lowercase;
 }
 .category-filter li a:before {
   content: "";

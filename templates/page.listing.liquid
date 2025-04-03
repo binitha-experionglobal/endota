@@ -41,35 +41,43 @@
     </div>
   </div>
   <ul class="category-filter">
-    {% assign subcategories_json = collections.face.metafields.custom.subcategories.value %}
-    <div id="subcategory-data" data-subcategories="{{ subcategories_json | json | escape }}">
-      <li class="active">
-        <a id="category-active" class="no-decoration" href="#"> </a>
-      </li>
-      <span id="peer-categories"></span>
-    </div>
+    <script>
+      let categoryArray = [];
+      var allCollections = JSON.parse('{{ collections | json }}');
+      console.log({{collections.shop.metafields.custom.parent_category | json}});
+      allCollections.forEach((element) => {
+        categoryArray.push(element.handle);
+      });
+    </script>
+
+    <li class="active">
+      <a id="category-active" class="no-decoration" href="#"> </a>
+    </li>
+    <span id="peer-categories"></span>
 
     <script>
+      categoryArray.forEach((element) => {
+        let face = JSON.parse('{{collections.face.metafields.custom.subcategories.value | json}}');
+        console.log(element);
+      });
+
+      let face = JSON.parse('{{collections.face.metafields.custom.subcategories.value | json}}');
       document.addEventListener('DOMContentLoaded', function () {
-        const subcategoryElement = document.getElementById('subcategory-data');
         const peerContainer = document.getElementById('peer-categories');
         const category = document.getElementById('category-active');
         const mainContainer = document.getElementById('main-container-text');
-
-        if (subcategoryElement) {
+        if (face) {
           try {
-            const subcategories = JSON.parse(subcategoryElement.dataset.subcategories);
-            console.log('Parsed JSON:', subcategories);
-            category.innerHTML = subcategories[0].subcategory_details.category.replace('_', ' ');
-            mainContainer.innerHTML = subcategories[0].subcategory_details.category.replace('_', ' ').toUpperCase();
+            category.innerHTML = face[0].subcategory_details.category.replace('_', ' ');
+            mainContainer.innerHTML = face[0].subcategory_details.category.replace('_', ' ').toUpperCase();
             let peerHtml = '';
-            subcategories[0].subcategory_details.peer.forEach((element) => {
-              console.log(element);
+            face.forEach((element) => {
               peerHtml += `<li class="un-active">
-          <a class="no-decoration" href=${element.link}>${element.name.replace(/_/g, ' ')}</a>
+          <a class="no-decoration" href=${
+            element.subcategory_details.link
+          }>${element.subcategory_details.category.replace(/_/g, ' ')}</a>
         </li>`;
             });
-            console.log(peerHtml);
             peerContainer.innerHTML = peerHtml;
           } catch (error) {
             console.error('Error parsing subcategories JSON:', error);
