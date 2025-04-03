@@ -120,7 +120,7 @@
           subcat.forEach(({ handle }) => {
             const isActiveClass = handle === url_path ? 'active' : 'un-active';
             if (handle === url_path) isActive = true;
-            let catName = handle.replace(/-/g, ' ').replace(/and/g, '&');
+            let catName = handle.replace(/-/g, ' ').replace(/ and /g, ' & ');
             peerHtml += `
         <li class="${isActiveClass}">
           <a class="no-decoration" href="${handle}">${catName}</a>
